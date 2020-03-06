@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>tracker.test.html</title>
+
+    <style>
+body{background-color:#ff0;font-family:sans-serif;overflow:hidden}#rootContainer{height:1.5rem;visibility:hidden;width:100%}.root{background-color:red;height:100%;transition:width 1s ease-out;width:0}#root{font-family:sans-serif}#percCompletedDisplay{color:#000;font-size:10em;text-align:center;margin-top:1.5rem;position:absolute;width:100%}
+    </style>
+  </head>
+
+  <body>
+    <div id="rootContainer">
+      <div id="root" class="sapUiBody root"></div>
+    </div>
+
+    <div id="percCompletedDisplay">0%</div>
+
+    <script>
+window.Tracker=function(b,p,t){function g(){return h?k/h:1}function q(){for(var a=0,u=b.length,l=0;l<u;l++){var d=b[l],e=d.pending;if(e){var c=d.track;"function"==typeof c?(c=c.call(f,f,this,d))?"number"==typeof c&&(a+=c):e=!1:document.querySelector(c)&&(e=!1);e||(d.pending=!1)}e||(a+=d.weight)}if(k!=a){k=a;a=g();var v=p&&p(this,a)}else a=g();(v||1<=a)&&m&&(f.clearInterval(m),m=null);return a}var f=window;b=b||[];for(var h=0,n=b.length-1;0<=n;n--){var r=b[n];h+=r.weight;r.pending=!0}var k=0;this.getPercCompleted=
+g;this.update=q;var m=f.setInterval(q.bind(this),t||1E3)};
+    </script>
+
+    <script>
+(function(e){function k(b,a,c){if(!a.f){var d=b.sap;d&&(d=d.ui);if(d){var m=d.g;d.g=function(n){a.c||n!=c||(a.c=!0);return m.apply(d,arguments)};a.f=!0}}return f(a,!g&&!a.c)}function f(b,a){a?b.index<=l&&(a=Math.min(b.b?++b.b:b.b=1,b.weight-1)):l=b.index+1;return a}e.a=e.getElementById;var g,l=0,h=e.a("root");new Tracker([{name:"TB",track:function(b,a,c){return f(c,!1)},weight:5,index:0},{name:"SC",track:function(b,a,c){return f(c,!b.sap)},weight:15,index:1},{name:"SL",track:function(b,a,c){(a=b.sap)&&
+(a=a.m);a&&(a="rgb(250, 250, 250)"==b.getComputedStyle(h).backgroundColor)&&(g=!0,h.innerHTML="<b/>");return f(c,!a)},weight:10,index:4},{name:"SPC",track:function(b,a,c){return k(b,c,"sap/ui/base/ManagedObjectObserver")},weight:65,index:2},{name:"SPM",track:function(b,a,c){return k(b,c,"sap/m/ColumnHeaderPopover")},weight:4,index:3},{name:"TE",track:"#root *",weight:1,index:5}],function(b,a){null==g&&(e.a("rootContainer").style.visibility="inherit",g=!1);var c=Math.floor(100*a)+"%",d=h.style;d.width=
+c;1<=a&&(d.backgroundColor="green",d.transitionDuration="0s");e.a("percCompletedDisplay").innerHTML=c})})(document);
+    </script>
+
+    <script id="sap-ui-bootstrap"
+            src="https://openui5.hana.ondemand.com/resources/sap-ui-core.js"
+            data-sap-ui-theme="sap_belize"
+            data-sap-ui-libs="sap.m"
+            data-sap-ui-async="true"
+    ></script>
+  </body>
+</html>
