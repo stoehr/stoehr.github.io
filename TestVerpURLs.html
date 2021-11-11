@@ -40,7 +40,7 @@ verpTestURLs.forEach((url) => {
     if (verpTestedCount == verpTotalTestCount) {
       const success = (verpPermCount == 1);
       verpOut = `TestVerpURLs: END (${verpTotalTestCount} with ${success ? 'SUCCESS' : 'ERROR because of ' + verpPermCount + ' permutations'})`;
-      console[success ? 'info' : 'error']('$s - %o', verpOut, verpRespInfos);
+      console[success ? 'info' : 'error']('%s - %o', verpOut, verpRespInfos);
       alert(verpOut);
     }
   });
