@@ -16,13 +16,13 @@ var verpTestURLs = JSON.parse(window.prompt('Enter the Verp Test URLs', '[]')),
   verpTestedCount = 0,
   verpPermCount = 0;
  
-var verpTotalTestCount = verpTestURLs.length;
+var verpTotalTestCount = verpTestURLs ? verpTestURLs.length : -1;
 
 var verpOut = `TestVerpURLs: BEG (${verpTotalTestCount})`;
 console.info(verpOut);
 alert(verpOut);
  
-verpTestURLs.forEach((url) => {
+(verpTotalTestCount > 0) && verpTestURLs.forEach((url) => {
   jQuery.ajax(url, {
     cache: true
   }).done((data) => {
@@ -45,6 +45,12 @@ verpTestURLs.forEach((url) => {
     }
   });
 });
+
+if (verpTotalTestCount <= 0) {
+  verpOut = `TestVerpURLs: END (${verpTotalTestCount})`;
+  console.info(verpOut);
+  alert(verpOut);
+}
 
     </script>
   </body>
