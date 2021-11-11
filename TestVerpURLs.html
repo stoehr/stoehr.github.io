@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>TestVerpURLs</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+
+  <body>
+    <script>
+
+var verpTestURLs = JSON.parse(window.prompt('Enter the Verp Test URLs', '[]')),
+  verpRespInfos = {},
+  verpTestedCount = 0,
+  verpPermCount = 0;
+ 
+var verpTotalTestCount = verpTestURLs.length;
+
+var verpOut = `TestVerpURLs: BEG (${verpTotalTestCount})`;
+console.info(verpOut);
+alert(verpOut);
+ 
+verpTestURLs.forEach((url) => {
+  jQuery.ajax(url, {
+    cache: true
+  }).done((data) => {
+    verpTestedCount++;
+    const resStr = JSON.stringify(data);
+    let respInfo = verpRespInfos[resStr],
+      extraMsg = '';
+    if (!respInfo) {
+      respInfo = verpRespInfos[resStr] = [];
+      verpPermCount++;
+      extraMsg = '(first response permutation)';
+    }
+    respInfo.push(url);
+    console.log('TestVerpURLs: Test %i for %s %s', verpTestedCount, url, extraMsg);
+    if (verpTestedCount == verpTotalTestCount) {
+      const success = (verpPermCount == 1);
+      verpOut = `TestVerpURLs: END (${verpTotalTestCount} with ${success ? 'SUCCESS' : 'ERROR because of ' + verpPermCount + ' permutations'})`;
+      console[success ? 'info' : 'error']('$s - %o', verpOut, verpRespInfos);
+      alert(verpOut);
+    }
+  });
+});
+
+    </script>
+  </body>
+</html>
