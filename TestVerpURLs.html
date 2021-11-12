@@ -40,7 +40,7 @@ alert(verpOut);
     if (verpTestedCount == verpTotalTestCount) {
       const success = (verpPermCount == 1);
       verpOut = `TestVerpURLs: END (${verpTotalTestCount} with ${success ? 'SUCCESS' : `ERROR because of ${verpPermCount} permutations`})`;
-      console[success ? 'info' : 'error'](`${verpOut} - `, verpRespInfos);
+      console[success ? 'info' : 'error'](`${verpOut} -`, verpRespInfos);
       alert(verpOut);
     }
   });
