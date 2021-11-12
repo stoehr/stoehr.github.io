@@ -36,11 +36,11 @@ alert(verpOut);
       extraMsg = '(first response permutation)';
     }
     respInfo.push(url);
-    console.log('TestVerpURLs: Test %i for %s %s', verpTestedCount, url, extraMsg);
+    console.log(`TestVerpURLs: Test ${verpTestedCount} for ${url} ${extraMsg}`);
     if (verpTestedCount == verpTotalTestCount) {
       const success = (verpPermCount == 1);
       verpOut = `TestVerpURLs: END (${verpTotalTestCount} with ${success ? 'SUCCESS' : 'ERROR because of ' + verpPermCount + ' permutations'})`;
-      console[success ? 'info' : 'error']('%s - %o', verpOut, verpRespInfos);
+      console[success ? 'info' : 'error'](`${verpOut} - `, verpRespInfos);
       alert(verpOut);
     }
   });
